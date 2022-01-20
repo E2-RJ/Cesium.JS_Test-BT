@@ -6,6 +6,13 @@
 
   <meta charset="utf-8">
 
+  <!-- Modify element attributes -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
   <!-- Include the CesiumJS JavaScript and CSS files -->
 
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.87/Build/Cesium/Cesium.js"></script>
@@ -16,11 +23,18 @@
 
 <body>
 
-  <div id="cesiumContainer"></div>
+  <!-- Creates a section for the Cesium widget -->
+  <div id="cesiumContainer" class="fullSize"></div>
 
+  <!-- Displays "loading" overlay, when Cesium widget is loading -->
+  <div id="loadingOverlay">
+    <h1>Loading...</h1>
+  </div>
+
+  <!-- Loads CesiumJS app-->
   <script src="app.js"></script>
 
- </div>
+  </div>
 
 </body>
 
