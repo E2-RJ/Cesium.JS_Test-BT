@@ -16,7 +16,7 @@ RUN npm install
 COPY ./index.html ./
 COPY ./index.js ./
 COPY ./server.js ./
-COPY tilesets/TilesetWithTreeBillboards/ ./tilesets/TilesetWithTreeBillboards/
-
+COPY ./app.js ./
+COPY ./style.css ./
 EXPOSE 8004
 CMD [ "npm", "start" ]
