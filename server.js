@@ -8,6 +8,7 @@
     var fs = require('fs');
     var url = require('url');
     var request = require('request');
+    const cors = require('cors')
 
     var gzipHeader = Buffer.from("1F8B08", "hex");
 
@@ -50,6 +51,10 @@
     });
 
     var app = express();
+
+    // enabling CORS for any unknow origin(https://xyz.example.com)
+    app.use(cors());
+
     app.use(compression());
 
     app.use(function (req, res, next) {
@@ -78,6 +83,15 @@
 
     var knownTilesetFormats = [/\.b3dm/, /\.pnts/, /\.i3dm/, /\.cmpt/, /\.glb/, /tileset.*\.json$/];
     app.get(knownTilesetFormats, checkGzipAndNext);
+
+    app.get("/", (req, res) => {
+        res.set({
+            "Allow-access-Allow-Origin": "*",
+        });
+
+        // res.send("Hello World");
+        return res.redirect("./index.html");
+    });
 
     // Custom code for serving TilesetWithExpiration. When points.pnts is requested it cycles between the tiles in the cache folder.
     var expirationPntsPath = '/tilesets/TilesetWithExpiration/points.pnts';
@@ -111,7 +125,7 @@
     var dontProxyHeaderRegex = /^(?:Host|Proxy-Connection|Connection|Keep-Alive|Transfer-Encoding|TE|Trailer|Proxy-Authorization|Proxy-Authenticate|Upgrade)$/i;
 
     app.get('/siteVisit', async function (req, res) {
-            console.log("Someone visited the site")
+        console.log("Someone visited the site")
     })
 
     function filterHeaders(req, headers) {
