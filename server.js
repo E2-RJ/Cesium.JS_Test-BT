@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
     /*global console,require,__dirname,process*/
     /*jshint es3:false*/
@@ -12,24 +12,24 @@
     var gzipHeader = Buffer.from("1F8B08", "hex");
 
     var yargs = require('yargs').options({
-        'port' : {
-            'default' : process.env.PORT || 8004,
-            'description' : 'Port to listen on.'
+        'port': {
+            'default': process.env.PORT || 8004,
+            'description': 'Port to listen on.'
         },
-        'public' : {
-            'type' : 'boolean',
-            'description' : 'Run a public server that listens on all interfaces.'
+        'public': {
+            'type': 'boolean',
+            'description': 'Run a public server that listens on all interfaces.'
         },
-        'upstream-proxy' : {
-            'description' : 'A standard proxy server that will be used to retrieve data.  Specify a URL including port, e.g. "http://proxy:8000".'
+        'upstream-proxy': {
+            'description': 'A standard proxy server that will be used to retrieve data.  Specify a URL including port, e.g. "http://proxy:8000".'
         },
-        'bypass-upstream-proxy-hosts' : {
-            'description' : 'A comma separated list of hosts that will bypass the specified upstream_proxy, e.g. "lanhost1,lanhost2"'
+        'bypass-upstream-proxy-hosts': {
+            'description': 'A comma separated list of hosts that will bypass the specified upstream_proxy, e.g. "lanhost1,lanhost2"'
         },
-        'help' : {
-            'alias' : 'h',
-            'type' : 'boolean',
-            'description' : 'Show this help.'
+        'help': {
+            'alias': 'h',
+            'type': 'boolean',
+            'description': 'Show this help.'
         }
     });
     var argv = yargs.argv;
@@ -42,17 +42,17 @@
     // https://github.com/visionmedia/send/commit/d2cb54658ce65948b0ed6e5fb5de69d022bef941
     var mime = express.static.mime;
     mime.define({
-        'application/json' : ['czml', 'json', 'geojson', 'topojson'],
-        'model/vnd.gltf+json' : ['gltf'],
-        'model/vnd.gltf.binary' : ['glb'],
-        'application/octet-stream' : ['b3dm', 'pnts', 'i3dm', 'cmpt'],
-        'text/plain' : ['glsl']
+        'application/json': ['czml', 'json', 'geojson', 'topojson'],
+        'model/vnd.gltf+json': ['gltf'],
+        'model/vnd.gltf.binary': ['glb'],
+        'application/octet-stream': ['b3dm', 'pnts', 'i3dm', 'cmpt'],
+        'text/plain': ['glsl']
     });
 
     var app = express();
     app.use(compression());
 
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         next();
@@ -64,11 +64,11 @@
         var filePath = reqUrl.pathname.substring(1);
 
         var readStream = fs.createReadStream(filePath, { start: 0, end: 2 });
-        readStream.on('error', function(err) {
+        readStream.on('error', function (err) {
             next();
         });
 
-        readStream.on('data', function(chunk) {
+        readStream.on('data', function (chunk) {
             if (chunk.equals(gzipHeader)) {
                 res.header('Content-Encoding', 'gzip');
             }
@@ -85,10 +85,10 @@
     var expirationCacheLength = 5;
     var expireCount = 0;
 
-    app.use(expirationPntsPath, function(req, res) {
-        var pntsPath = expirationCacheDirectory +  'points_' + expireCount + '.pnts';
+    app.use(expirationPntsPath, function (req, res) {
+        var pntsPath = expirationCacheDirectory + 'points_' + expireCount + '.pnts';
         expireCount = (expireCount + 1) % expirationCacheLength;
-        res.sendFile(pntsPath, {root: __dirname});
+        res.sendFile(pntsPath, { root: __dirname });
         // Don't call next() because we don't need to run the express.static middleware
     });
 
@@ -110,10 +110,14 @@
 
     var dontProxyHeaderRegex = /^(?:Host|Proxy-Connection|Connection|Keep-Alive|Transfer-Encoding|TE|Trailer|Proxy-Authorization|Proxy-Authenticate|Upgrade)$/i;
 
+    app.get('/siteVisit', async function (req, res) {
+            console.log("Someone visited the site")
+    })
+
     function filterHeaders(req, headers) {
         var result = {};
         // filter out headers that are listed in the regex above
-        Object.keys(headers).forEach(function(name) {
+        Object.keys(headers).forEach(function (name) {
             if (!dontProxyHeaderRegex.test(name)) {
                 result[name] = headers[name];
             }
@@ -124,12 +128,12 @@
     var upstreamProxy = argv['upstream-proxy'];
     var bypassUpstreamProxyHosts = {};
     if (argv['bypass-upstream-proxy-hosts']) {
-        argv['bypass-upstream-proxy-hosts'].split(',').forEach(function(host) {
+        argv['bypass-upstream-proxy-hosts'].split(',').forEach(function (host) {
             bypassUpstreamProxyHosts[host.toLowerCase()] = true;
         });
     }
 
-    app.get('/proxy/*', function(req, res, next) {
+    app.get('/proxy/*', function (req, res, next) {
         // look for request like http://localhost:8080/proxy/http://example.com/file?query=1
         var remoteUrl = getRemoteUrlFromParam(req);
         if (!remoteUrl) {
@@ -156,11 +160,11 @@
         // encoding : null means "body" passed to the callback will be raw bytes
 
         request.get({
-            url : url.format(remoteUrl),
-            headers : filterHeaders(req, req.headers),
-            encoding : null,
-            proxy : proxy
-        }, function(error, response, body) {
+            url: url.format(remoteUrl),
+            headers: filterHeaders(req, req.headers),
+            encoding: null,
+            proxy: proxy
+        }, function (error, response, body) {
             var code = 500;
 
             if (response) {
@@ -173,7 +177,7 @@
     });
 
     argv.public = true;
-    var server = app.listen(argv.port, argv.public ? undefined : 'localhost', function() {
+    var server = app.listen(argv.port, argv.public ? undefined : 'localhost', function () {
         if (argv.public) {
             console.log('Cesium development server running publicly.  Connect to http://localhost:%d/', server.address().port);
         } else {
@@ -195,12 +199,12 @@
         process.exit(1);
     });
 
-    server.on('close', function() {
+    server.on('close', function () {
         console.log('Cesium development server stopped.');
     });
 
-    process.on('SIGINT', function() {
-        server.close(function() {
+    process.on('SIGINT', function () {
+        server.close(function () {
             process.exit(0);
         });
     });

@@ -4,6 +4,13 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 var menuOpen = false;
 w3.show('#leftMenu')
 
+// Url for the request 
+var url = 'http://0.0.0.0:8004/siteVisit';
+
+// Making our request 
+fetch(url, { method: 'GET' }).catch(errorMsg => { console.log(errorMsg); });
+
+
 const viewer = new Cesium.Viewer('cesiumContainer', {
     /*imageryProvider : new Cesium.TileMapServiceImageryProvider({url : Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')}),*/ //Inbuilt Low res baselayer
     imageryProvider: new Cesium.UrlTemplateImageryProvider({ // Access the CartoDB Positron basemap, which uses an OpenStreetMap-like tiling scheme.
