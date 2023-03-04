@@ -1,26 +1,274 @@
 .fullSize {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: none;
-    width: 100%;
-    height: 100%;
-  }
-  
-  #loadingOverlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0.9;
-    width: 100%;
-    height: 100%;
-    display: none;
-  }
-  
-  #loadingOverlay h1 {
-    text-align: center;
-    position: relative;
-    top: 50%;
-    margin-top: -0.5em;
-  }
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: rgb(183, 219, 255);
+}
+
+table {
+  background-color: rgba(34, 33, 33, 0.418);
+  color: rgb(255, 255, 255);
+}
+
+button {
+  border-radius: 2px;
+  text-align: center;
+  width: 250px;
+}
+
+#loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.9;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+#loadingOverlay h1 {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  margin-top: -0.5em;
+}
+
+#video {
+  width: 18vw;
+  height: 12vw;
+}
+
+#toolbar {
+  margin: 5px;
+  padding: 2px 5px;
+  position: absolute;
+  border-radius: 2px;
+}
+
+#preview {
+  position: absolute;
+  bottom: 75px;
+  right: 0;
+  width: 640px;
+  height: 360px;
+}
+
+#backbtn {
+  margin: 5px;
+  padding: 2px 5px;
+  position: absolute;
+  border-radius: 2px;
+}
+
+.dropbtn {
+  background-color: rgba(22, 22, 22, 0.78);
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(34, 33, 33, 0.418);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content button {
+  color: rgb(0, 0, 0);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: rgb(245, 24, 8);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: rgb(24, 116, 202);
+}
+
+.backdrop {
+  display: inline-block;
+  background: rgba(42, 42, 42, 0.7);
+  border-radius: 5px;
+  border: 1px solid #444;
+  padding: 5px 10px;
+  color: #fff;
+  line-height: 150%;
+  font-size: small;
+}
+
+#heightSliderLabel,
+#heightValue {
+  vertical-align: top;
+}
+
+.backdrop a:link,
+.backdrop a:visited,
+.backdrop a:hover {
+  color: #fff
+}
+
+.loadingIndicator {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -33px;
+  margin-left: -33px;
+  width: 66px;
+  height: 66px;
+  background: url(Source/Images/ajax-loader.gif) center no-repeat;
+}
+
+.cover {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.75);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#initialScreen {
+  position: fixed;
+  left: 37.5%;
+  top: 25%;
+  width: 25vw;
+  max-width: 25%;
+  height: 50vw;
+  max-height: 50%;
+}
+
+#leftMenu {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 20vw;
+  max-width: 20%;
+  max-height: 100vw;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+html,
+body,
+#cesiumContainer {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: sans-serif;
+  background: #000;
+}
+
+button.cesium-infoBox-camera {
+  display: none;
+}
+
+#3DTiles {
+  padding-top: 10px;
+}
+
+.cesium-widget-credits {
+  display: none !important;
+}
+
+#trailer {
+  position: absolute;
+  bottom: 75px;
+  right: 0;
+  width: 480px;
+  height: 270px;
+  padding: 5px 8px;
+  border-radius: 5px;
+}
+
+h2 {
+  font-size: 17px;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+h4 {
+  font-size: 12px;
+}
+
+
+#tileStyle{
+width: 20vw;  
+}
+
+
+
+.collapsible {
+  background: rgba(42, 42, 42, 0.7);
+  transition: max-height 0.2s ease-out;
+  width: 20vw;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active,
+.collapsible:hover {
+  background-color: rgba(42, 42, 42, 0.7);
+}
+
+.collapsible:after {
+  content: 'More Info \002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 0;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  border: none;
+  overflow: auto;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+
+.h2 {
+  margin: 0;
+  display: inline-block;
+}

@@ -17,6 +17,8 @@
 
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.87/Build/Cesium/Cesium.js"></script>
   <script src="/debug.js"></script>
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
+  <script src="/functions.js"></script>
 
   <link href="https://cesium.com/downloads/cesiumjs/releases/1.87/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 
@@ -27,10 +29,33 @@
   <!-- Creates a section for the Cesium widget -->
   <div id="cesiumContainer" class="fullSize"></div>
 
-  <!-- Displays "loading" overlay, when Cesium widget is loading -->
-  <div id="loadingOverlay">
-    <h1>Loading...</h1>
+  <div id="leftMenu">
+    <button class="collapsible" id="leftCollapsible">
+      <h2 id="projectName">Autopopulated (See fieldChange)</h2>
+      <h2 id="timeFrame">Autopopulated (See fieldChange)</h2>
+      <video id="video" muted="" autoplay="" loop="" crossorigin="" controls=""></video>
+    </button>
+    <div class="content">
+      <p id="author">Autopopulated (See fieldChange)</p>
+      <p id="paragraph">AutopoAutopopulated (See fieldChange)pulated</p>
+      <p id="format">Autopopulated (See fieldChange)</p>
+      <p id="colour">Autopopulated (See fieldChange)</p>
+      <p id="length">Autopopulated (See fieldChange)</p>
+      <p id="co-ords">Autopopulated (See fieldChange)</p>
+      <p id="location">Autopopulated (See fieldChange)</p>
+      <p id="extField1">Autopopulated (See fieldChange)</p>
+      <p id="extField2">Autopopulated (See fieldChange)</p>
+      <p id="extField3">Autopopulated (See fieldChange)</p>
+    </div>
+    <br>
+    <button id="back" onclick="homeView()">Back</button>
   </div>
+
+  <div id="loadingIndicator" class="cover">
+    <div id="loadingIcon" class="loadingIndicator"></div>
+  </div>
+
+  </video>
 
   <!-- Loads CesiumJS app-->
   <script src="app.js"></script>
