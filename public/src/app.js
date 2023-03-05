@@ -1,17 +1,15 @@
-// Access token, found at: https://cesium.com/ion/tokens.
-Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiNzMyNjg5Zi00ZTI5LTRmYWEtOTE3Mi1kOTk3Y2RjYjY1YWEiLCJpZCI6NzQ1MjEsImlhdCI6MTYzNzgyMzU4N30.JFkVpFHpCeYuhC4KDr5_Or8PZArO_v8ed9nuP2j1xUU';
+//BACKEND REQUESTS
 
-var menuOpen = false;
-w3.show('#leftMenu')
+var url = 'http://0.0.0.0:8004/siteVisit'; // Url for the request 
 
-// Url for the request 
-var url = 'http://0.0.0.0:8004/siteVisit';
+fetch(url, { method: 'GET' }).then(function () { console.log("Site Loaded"); }).catch(errorMsg => { console.log(errorMsg); }); // Making our request 
 
-// Making our request 
-fetch(url, { method: 'GET' })
-.then(function () { console.log("Site Loaded"); })
-.catch(errorMsg => { console.log(errorMsg); });
 
+
+
+//CESIUM
+
+Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiNzMyNjg5Zi00ZTI5LTRmYWEtOTE3Mi1kOTk3Y2RjYjY1YWEiLCJpZCI6NzQ1MjEsImlhdCI6MTYzNzgyMzU4N30.JFkVpFHpCeYuhC4KDr5_Or8PZArO_v8ed9nuP2j1xUU'; // Access token, found at: https://cesium.com/ion/tokens.
 
 const viewer = new Cesium.Viewer('cesiumContainer', {
     /*imageryProvider : new Cesium.TileMapServiceImageryProvider({url : Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')}),*/ //Inbuilt Low res baselayer
@@ -42,8 +40,7 @@ scene.globe.enableLighting = false; // Enable lighting based on sun/moon positio
 
 scene.debugShowFramesPerSecond = false; // Shows FPS counter overlay, mainly for debugging purposes
 
-//clampgeojson to ground so it can be viewed with terrain
-Cesium.GeoJsonDataSource.clampToGround = true;
+Cesium.GeoJsonDataSource.clampToGround = true; //clampgeojson to ground so it can be viewed with terrain
 
 // Clear scene and set default view.
 var handler;
@@ -112,6 +109,12 @@ function homeView() {
 homeView()
 
 
+
+//SIDE MENU
+
+var menuOpen = false;
+w3.show('#leftMenu')
+
 var coll = document.getElementsByClassName("collapsible");
 var i;
 
@@ -129,6 +132,10 @@ for (i = 0; i < coll.length; i++) {
         }
     });
 }
+
+
+
+// CESIUM POINTS & EVENTS
 
 var GranbyStreet = viewer.entities.add({
     name: 'ecosystem2',
@@ -168,8 +175,8 @@ viewer.selectedEntityChanged.addEventListener(function (selectedEntity) { //List
                     "# entries: INTEGER", //Media Length
                     "Tags: a collection of hashtags to order content", //Project Co-ords
                     "Collections: this is separate collections <br><br> links that open information such as pictures that the user orders and posts to their profile", //Project Location
-                    "Total cache: reveals the total number of entries as czml points", //Project Co-ords
-                    "Key:value" //Project Co-ords
+                    "Total cache: reveals the total number of entries as czml points", //Extra Field
+                    "Key:value" //Extra Field
                 )
                 break; //Stops execution
 
