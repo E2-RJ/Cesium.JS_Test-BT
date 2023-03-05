@@ -8,7 +8,9 @@ w3.show('#leftMenu')
 var url = 'http://0.0.0.0:8004/siteVisit';
 
 // Making our request 
-fetch(url, { method: 'GET' }).catch(errorMsg => { console.log(errorMsg); });
+fetch(url, { method: 'GET' })
+.then(function () { console.log("Site Loaded"); })
+.catch(errorMsg => { console.log(errorMsg); });
 
 
 const viewer = new Cesium.Viewer('cesiumContainer', {
