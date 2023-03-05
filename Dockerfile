@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:16
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -13,10 +13,6 @@ RUN npm install
 # RUN npm ci --only=production
 
 # Bundle app source
-COPY ./index.html ./
-COPY ./index.js ./
-COPY ./server.js ./
-COPY ./app.js ./
-COPY ./style.css ./
+COPY . .
 EXPOSE 8004
-CMD [ "npm", "start" ]
+CMD [ "node", "index.js", "--public=true" ]
