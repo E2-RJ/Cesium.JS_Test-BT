@@ -89,7 +89,7 @@ viewer.homeButton.viewModel.command.beforeExecute.addEventListener(function (e) 
 // Set the initial view
 function homeView() {
     checkMenu()
-    fieldChange( //Updates video and metadata elements, can be found in functions.js
+    fieldChange( //Updates image and metadata elements, can be found in functions.js
         "Test-BT", //Project name
         "Time Frame: 2023-", //Project Time Frame
         "e2", //Author
@@ -100,8 +100,7 @@ function homeView() {
         "", //Project Co-ords
         "Location: Liverpool" //Project Location
     )
-    w3.hide('#video')
-    document.getElementById("video").pause();
+    w3.hide('#image')
     w3.hide('#back')
     viewer.scene.camera.flyTo(homeCameraView);
 }
@@ -163,8 +162,8 @@ viewer.selectedEntityChanged.addEventListener(function (selectedEntity) { //List
         switch (selectedEntity.name) {
 
             case "ecosystem2": //Potential value returned from selectedEntity
-                newProject( //Updates video and metadata elements, can be found in functions.js
-                    '/Media/ResilienceGardenTrailer.mp4', //Media Location
+                newProject( //Updates image and metadata elements, can be found in functions.js
+                    './Media/adam.png', //Media Location
                     -2.957483, 53.395154, 190, //New camera position
                     "Name: TBD ", //Project name
                     "Project: e2", //Project Time Frame

@@ -4,7 +4,7 @@ function sleep(milliseconds) {
   }
 
 //Function to load a declared webpage (can be an external link), with a fancy zoom in effect to a given location (might be optional)
-function newProject(videoSource, Longitude, Latitude, Altitude, projectName, timeFrame, projectAuthor, paragraph, mediaFormat, mediaColour, mediaLength, projectcoords, projectlocation,extField1,extField2,extField3) {
+function newProject(imageSource, Longitude, Latitude, Altitude, projectName, timeFrame, projectAuthor, paragraph, mediaFormat, mediaColour, mediaLength, projectcoords, projectlocation,extField1,extField2,extField3) {
 
     viewer.camera.flyTo({ //Flys camera to given co-ordinates
       destination: Cesium.Cartesian3.fromDegrees(Longitude, Latitude, Altitude),
@@ -17,8 +17,8 @@ function newProject(videoSource, Longitude, Latitude, Altitude, projectName, tim
         await sleep(4000);
   
         checkMenu()
-        videoChange('video', videoSource); // Change video
-        w3.show('#video')
+        imageChange('image', imageSource); // Change image
+        w3.show('#image')
         fieldChange(projectName, timeFrame, projectAuthor, paragraph, mediaFormat, mediaColour, mediaLength, projectcoords, projectlocation,extField1,extField2,extField3)
       }
     }
@@ -26,15 +26,15 @@ function newProject(videoSource, Longitude, Latitude, Altitude, projectName, tim
     loadResource()
   }
   
-  function videoChange(id, videoSource) {
-    document.getElementById(id).src = videoSource; //Updates video element
+  function imageChange(id, imageSource) {
+    document.getElementById(id).src = imageSource; //Updates image element
     document.getElementById(id).load;
   }
   
-  function videoRemove() {
+  function imageRemove() {
   
-    document.getElementById('video').src = '';
-    document.getElementById('video').load;
+    document.getElementById('image').src = '';
+    document.getElementById('image').load;
   
   }
   
