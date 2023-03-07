@@ -63,8 +63,8 @@ function resetScene() {
 scene.camera.setView(homeCameraView);
 
 // Create an initial camera view
-var initialPosition = new Cesium.Cartesian3.fromDegrees(-2.959, 53.369, 1700.082);
-var initialOrientation = new Cesium.HeadingPitchRoll.fromDegrees(-3.7, -37.9, 0.0);
+var initialPosition = new Cesium.Cartesian3.fromDegrees(-3.0218179, 53.4276631, 2500);
+var initialOrientation = new Cesium.HeadingPitchRoll.fromDegrees(2, -37.9, 0.0);
 var homeCameraView = {
     destination: initialPosition,
     orientation: {
@@ -138,7 +138,7 @@ for (i = 0; i < coll.length; i++) {
 
 var GranbyStreet = viewer.entities.add({
     name: 'ecosystem2',
-    position: Cesium.Cartesian3.fromDegrees(-2.957483, 53.395154, 120),
+    position: Cesium.Cartesian3.fromDegrees(-3.0228179, 53.4576631, 120),
     point: {
         pixelSize: 25,
         color: Cesium.Color.DEEPSKYBLUE,
@@ -163,18 +163,18 @@ viewer.selectedEntityChanged.addEventListener(function (selectedEntity) { //List
 
             case "ecosystem2": //Potential value returned from selectedEntity
                 newProject( //Updates image and metadata elements, can be found in functions.js
-                    './Media/adam.png', //Media Location
-                    -2.957483, 53.395154, 190, //New camera position
-                    "Name: TBD ", //Project name
-                    "Project: e2", //Project Time Frame
-                    "Location: Lat/long ", //Author
-                    "Pinned photos: 3 thumbnail images of locations", //Project description
+                    './Media/Adam2.jpg', //Media Location
+                    -3.0228179, 53.4576631, 190, //New camera position
+                    "Name: Ecosystem 2 ", //Project name
+                    "Project: Interface for Land Based Projects", //Project Time Frame
+                    "Location: Latitude/Longitude ", //Author
+                    "Pinned photos: 3 thumbnail images of locations", './Media/BTLiverpool-01.jpg', './Media/BTLiverpool-06.jpg', './Media/BTLiverpool-11.jpg',//Project description
                     "Time activated: ISO8601", //Media format
                     "Project description: STRING", //Media colour
                     "# entries: INTEGER", //Media Length
                     "Tags: a collection of hashtags to order content", //Project Co-ords
-                    "Collections: this is separate collections <br><br> links that open information such as pictures that the user orders and posts to their profile", //Project Location
-                    "Total cache: reveals the total number of entries as czml points", //Extra Field
+                    "Collections: this is a set of user managed links which describe areas of activity through media - text, images, film <br><br> example collections: SOWINGS - BLOOMS - HARVEST - COMMUNITY - SPECIES - SOIL", //Project Location
+                    "Total cache: reveals the total number of entries as map points", //Extra Field
                     "Key:value" //Extra Field
                 )
                 break; //Stops execution
