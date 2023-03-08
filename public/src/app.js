@@ -29,7 +29,8 @@ const viewer = new Cesium.Viewer('cesiumContainer', {
     clock: true,
     canAnimate: true,
     navigationHelpButton: false,
-    scene3DOnly: true
+    scene3DOnly: true,
+    infoBox: false
 });
 
 var scene = viewer.scene;
@@ -63,8 +64,8 @@ function resetScene() {
 scene.camera.setView(homeCameraView);
 
 // Create an initial camera view
-var initialPosition = new Cesium.Cartesian3.fromDegrees(-2.959, 53.369, 1700.082);
-var initialOrientation = new Cesium.HeadingPitchRoll.fromDegrees(-3.7, -37.9, 0.0);
+var initialPosition = new Cesium.Cartesian3.fromDegrees(-3.0218179, 53.4276631, 2500);
+var initialOrientation = new Cesium.HeadingPitchRoll.fromDegrees(2, -37.9, 0.0);
 var homeCameraView = {
     destination: initialPosition,
     orientation: {
@@ -89,19 +90,22 @@ viewer.homeButton.viewModel.command.beforeExecute.addEventListener(function (e) 
 // Set the initial view
 function homeView() {
     checkMenu()
-    fieldChange( //Updates video and metadata elements, can be found in functions.js
-        "Test-BT", //Project name
-        "Time Frame: 2023-", //Project Time Frame
-        "e2", //Author
-        "Webapp Description: TBD", //Project description
-        "", //Media format
-        "", //Media colour
-        "", //Media Length
-        "", //Project Co-ords
-        "Location: Liverpool" //Project Location
+    pointSelected = false;
+    slideToggle()
+    fieldChange( //Updates image and metadata elements, can be found in functions.js
+
+    "Test-BT", //Project name
+    "", //Project short decription
+    "Location: Liverpool", //Project location
+    "Time Frame: 2023-", //Time activated
+    "Webapp Description: TBD", //Project description
+    "", //NUmber of entries
+    "", //Project Tags
+    "", //Project collections
+    "", //Number of map points
+    "" //Key value
     )
-    w3.hide('#video')
-    document.getElementById("video").pause();
+    w3.hide('#image')
     w3.hide('#back')
     viewer.scene.camera.flyTo(homeCameraView);
 }
@@ -113,6 +117,8 @@ homeView()
 //SIDE MENU
 
 var menuOpen = false;
+var pointSelected = false;
+
 w3.show('#leftMenu')
 
 var coll = document.getElementsByClassName("collapsible");
@@ -139,7 +145,7 @@ for (i = 0; i < coll.length; i++) {
 
 var GranbyStreet = viewer.entities.add({
     name: 'ecosystem2',
-    position: Cesium.Cartesian3.fromDegrees(-2.957483, 53.395154, 120),
+    position: Cesium.Cartesian3.fromDegrees(-3.0228179, 53.4576631, 120),
     point: {
         pixelSize: 25,
         color: Cesium.Color.DEEPSKYBLUE,
@@ -163,20 +169,22 @@ viewer.selectedEntityChanged.addEventListener(function (selectedEntity) { //List
         switch (selectedEntity.name) {
 
             case "ecosystem2": //Potential value returned from selectedEntity
-                newProject( //Updates video and metadata elements, can be found in functions.js
-                    '/Media/ResilienceGardenTrailer.mp4', //Media Location
-                    -2.957483, 53.395154, 190, //New camera position
-                    "Name: TBD ", //Project name
-                    "Project: e2", //Project Time Frame
-                    "Location: Lat/long ", //Author
-                    "Pinned photos: 3 thumbnail images of locations", //Project description
-                    "Time activated: ISO8601", //Media format
-                    "Project description: STRING", //Media colour
-                    "# entries: INTEGER", //Media Length
-                    "Tags: a collection of hashtags to order content", //Project Co-ords
-                    "Collections: this is separate collections <br><br> links that open information such as pictures that the user orders and posts to their profile", //Project Location
-                    "Total cache: reveals the total number of entries as czml points", //Extra Field
-                    "Key:value" //Extra Field
+                newProject( //Updates image and metadata elements, can be found in functions.js
+                -3.0228179, 53.4576631, 190, //New camera position
+                    './Media/Adam2.jpg', //Media Location
+                    './Media/BTLiverpool-01.jpg',
+                    './Media/BTLiverpool-06.jpg',
+                    './Media/BTLiverpool-11.jpg',
+                    "Name: Ecosystem 2 ", //Project name
+                    "Project: Interface for Land Based Projects", //Project short decription
+                    "Location: Latitude/Longitude ", //Project location
+                    "Time activated: ISO8601", //Time activated
+                    "Project description: STRING", //Project description
+                    "# entries: INTEGER", //NUmber of entries
+                    "Tags: a collection of hashtags to order content", //Project Tags
+                    "Collections: this is a set of user managed links which describe areas of activity through media - text, images, film <br><br> example collections: SOWINGS - BLOOMS - HARVEST - COMMUNITY - SPECIES - SOIL", //Project collections
+                    "Total cache: reveals the total number of entries as map points", //Number of map points
+                    "Key:value" //Key value
                 )
                 break; //Stops execution
 
